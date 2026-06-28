@@ -2,6 +2,7 @@
 
 [![build](https://github.com/andrerecio/clean-beamer/actions/workflows/build.yml/badge.svg)](https://github.com/andrerecio/clean-beamer/actions/workflows/build.yml)
 [![license](https://img.shields.io/github/license/andrerecio/clean-beamer)](LICENSE)
+[![release](https://img.shields.io/github/v/release/andrerecio/clean-beamer)](https://github.com/andrerecio/clean-beamer/releases/latest)
 [![demo](https://img.shields.io/badge/demo-PDF-EC1C24?logo=adobeacrobatreader&logoColor=white)](demo.pdf)
 
 A minimalist Beamer theme — a LaTeX port of the Typst
