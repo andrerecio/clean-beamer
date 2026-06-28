@@ -10,10 +10,8 @@ A minimalist Beamer theme — a LaTeX port of the Typst
 slide theme (itself based on Grant McDermott's *Clean* theme for Quarto +
 Reveal.js).
 
-![demo](figures/example-plot.png)
 
-See the rendered result in **[`demo.pdf`](demo.pdf)** — committed to the repo so
-you can preview the look without building anything.
+See the rendered result in **[`demo.pdf`](demo.pdf)** 
 
 ## Use
 
@@ -25,6 +23,8 @@ Put `beamerthemeClean.sty` next to your `.tex` file and:
 \usepackage[scaled]{FiraMono}
 \usetheme{Clean}
 ```
+
+Alternatively clone the repo and use the `demo.tex` as a template or fork the repo and import using Overleaf's GitHub integration.
 
 See [`demo.tex`](demo.tex) for a full, self-contained example.
 
@@ -121,4 +121,4 @@ This repo does not assume any local LaTeX install. Every push is compiled by
 GitHub Actions, which uploads the resulting `demo.pdf` as a build artifact
 (Actions → latest run → Artifacts → `demo-pdf`).
 
-To build locally anyway: `latexmk -pdf demo.tex`.
+To build locally: `latexmk -pdf demo.tex`.
