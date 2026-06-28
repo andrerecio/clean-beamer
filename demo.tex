@@ -10,9 +10,10 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 
-% --- Bibliography: biblatex + biber, author–year (chicago-like) ------
-% latexmk runs biber automatically in CI, so a plain .bib just works.
-\usepackage[style=authoryear, sorting=nyt, backend=biber]{biblatex}
+% --- Bibliography: true Chicago author–date via biblatex-chicago -----
+% biblatex-chicago loads biblatex with the Chicago authordate style; biber
+% is the backend and latexmk runs it automatically in CI.
+\usepackage[authordate, backend=biber]{biblatex-chicago}
 \addbibresource{references.bib}
 
 \usetheme{Clean}
