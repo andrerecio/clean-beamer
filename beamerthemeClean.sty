@@ -42,6 +42,18 @@
 \setbeamercolor{section title}{fg=cleanPrimary}
 \setbeamercolor{footline}{fg=cleanJet}
 
+% Bibliography (works with biblatex or classic bibtex output): drop the
+% default reference icon and render entries small, in the foreground colour.
+\setbeamertemplate{bibliography item}{}
+\setbeamercolor{bibliography entry author}{fg=cleanJet}
+\setbeamercolor{bibliography entry title}{fg=cleanJet}
+\setbeamercolor{bibliography entry location}{fg=cleanJet}
+\setbeamercolor{bibliography entry note}{fg=cleanJet}
+\setbeamerfont{bibliography entry author}{size=\footnotesize}
+\setbeamerfont{bibliography entry title}{size=\footnotesize}
+\setbeamerfont{bibliography entry location}{size=\footnotesize}
+\setbeamerfont{bibliography entry note}{size=\footnotesize}
+
 % ----------------------------------------------------------------------
 % Fonts  (weights/sizes; actual typefaces are chosen in the .tex preamble)
 %   Target: Roboto Light for text/headings, Fira Mono for code.

@@ -10,6 +10,11 @@
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
 
+% --- Bibliography: biblatex + biber, author–year (chicago-like) ------
+% latexmk runs biber automatically in CI, so a plain .bib just works.
+\usepackage[style=authoryear, sorting=nyt, backend=biber]{biblatex}
+\addbibresource{references.bib}
+
 \usetheme{Clean}
 
 \title{A title}
@@ -67,6 +72,15 @@
   \end{semiverbatim}
 \end{frame}
 
+\begin{frame}{Citations}{Author--year, resolved from a \texttt{.bib} file}
+  Citations come straight from \texttt{references.bib}:
+  \begin{itemize}
+    \item Parenthetical: \parencite{goodman-bacon2021}.
+    \item Textual: \textcite{callaway2021} study staggered adoption.
+    \item Multiple, sorted: \parencite{callaway2021,arkhangelsky2024}.
+  \end{itemize}
+\end{frame}
+
 \section{Summary}
 
 \begin{frame}{Quarto Clean Typst Theme}{LaTeX / Beamer port}
@@ -76,6 +90,10 @@
     \item Slide counter \(x / y\) in the footer.
     \item Auto section slides via \texttt{\textbackslash AtBeginSection}.
   \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+  \printbibliography[heading=none]
 \end{frame}
 
 \end{document}
