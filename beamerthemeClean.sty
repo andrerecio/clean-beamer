@@ -36,6 +36,7 @@
 \setbeamercolor{itemize subsubitem}{fg=cleanPrimary}
 \setbeamercolor{enumerate item}{fg=cleanPrimary}
 \setbeamercolor{enumerate subitem}{fg=cleanPrimary}
+\setbeamercolor{enumerate subsubitem}{fg=cleanPrimary}
 
 \setbeamercolor{section title}{fg=cleanPrimary}
 \setbeamercolor{footline}{fg=cleanJet}
@@ -63,7 +64,8 @@
 
 % ----------------------------------------------------------------------
 % List markers
-%   level 1: filled right triangle (primary) · level 2: arrow · level 3: dot
+%   itemize  level 1: filled right triangle · level 2: arrow · level 3: dot
+%   enumerate level 1: 1. · level 2: i. · level 3: a.  (all primary)
 % ----------------------------------------------------------------------
 \setbeamertemplate{itemize item}%
   {\small\textcolor{cleanPrimary}{$\blacktriangleright$}}
@@ -72,10 +74,14 @@
 \setbeamertemplate{itemize subsubitem}%
   {\textcolor{cleanPrimary}{$\cdot$}}
 
+% Format each level's own counter so nesting reads 1. / i. / a.
+% (\insertenumlabel is always arabic, so it can't give roman/alpha sublevels.)
 \setbeamertemplate{enumerate item}%
-  {\textcolor{cleanPrimary}{\insertenumlabel.}}
+  {\textcolor{cleanPrimary}{\arabic{enumi}.}}
 \setbeamertemplate{enumerate subitem}%
-  {\textcolor{cleanPrimary}{\insertsubenumlabel.}}
+  {\textcolor{cleanPrimary}{\roman{enumii}.}}
+\setbeamertemplate{enumerate subsubitem}%
+  {\textcolor{cleanPrimary}{\alph{enumiii}.}}
 
 % ----------------------------------------------------------------------
 % Frame title (left aligned) with optional italic primary subtitle
