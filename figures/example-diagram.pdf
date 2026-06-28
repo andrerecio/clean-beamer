@@ -1,0 +1,49 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 150] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 311 >>
+stream
+0.063 0.471 0.584 rg
+20 55 60 40 re f
+1 1 1 rg
+BT /F1 11 Tf
+28 70 Td (Clean) Tj ET
+0.604 0.145 0.082 rg
+120 55 60 40 re f
+1 1 1 rg
+BT /F1 11 Tf
+128 70 Td (Beamer) Tj ET
+0.075 0.082 0.086 rg
+220 55 60 40 re f
+1 1 1 rg
+BT /F1 11 Tf
+228 70 Td (Theme) Tj ET
+0.2 0.2 0.2 RG 1 w
+80 75 m 120 75 l S
+180 75 m 220 75 l S
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000603 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+673
+%%EOF

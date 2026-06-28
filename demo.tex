@@ -1,5 +1,6 @@
 % demo.tex — test harness for the Clean theme.
-% Compiles with pdflatex (default in CI). See CLAUDE.md for the lualatex route.
+% Compiles with pdflatex (default in CI). See README.md for the optional
+% LuaLaTeX / Fira Code route.
 \documentclass[aspectratio=169, 11pt]{beamer}
 
 % --- Fonts: Roboto Light (text) + Fira Mono (code) -------------------
@@ -13,7 +14,10 @@
 % --- Bibliography: true Chicago author–date via biblatex-chicago -----
 % biblatex-chicago loads biblatex with the Chicago authordate style; biber
 % is the backend and latexmk runs it automatically in CI.
-\usepackage[authordate, backend=biber]{biblatex-chicago}
+% natbib=true additionally exposes the familiar \citet / \citep commands
+% (mapped onto the Chicago author–date engine), alongside biblatex's own
+% \textcite / \parencite.
+\usepackage[authordate, backend=biber, natbib=true]{biblatex-chicago}
 \addbibresource{references.bib}
 
 \usetheme{Clean}
@@ -74,12 +78,34 @@
 \end{frame}
 
 \begin{frame}{Citations}{Author--year, resolved from a \texttt{.bib} file}
-  Citations come straight from \texttt{references.bib}:
+  Citations come straight from \texttt{references.bib}. The natbib-style
+  commands are available alongside biblatex's own:
   \begin{itemize}
-    \item Parenthetical: \parencite{goodman-bacon2021}.
-    \item Textual: \textcite{callaway2021} study staggered adoption.
-    \item Multiple, sorted: \parencite{callaway2021,arkhangelsky2024}.
+    \item Textual: \citet{callaway2021} study staggered adoption.
+    \item Parenthetical: a robustness check \citep{goodman-bacon2021}.
+    \item Multiple, sorted: \citep{callaway2021,arkhangelsky2024}.
+    \item biblatex equivalents also work: \textcite{arkhangelsky2024},
+      \parencite{goodman-bacon2021}.
   \end{itemize}
+\end{frame}
+
+\begin{frame}{Figures}{External \texttt{.png} and \texttt{.pdf} via \texttt{\textbackslash includegraphics}}
+  Drop an image next to your \texttt{.tex} and include it as usual — both raster
+  (\texttt{.png}) and vector (\texttt{.pdf}) figures work under pdflatex.
+  \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \includegraphics[width=\linewidth]{figures/example-plot.png}
+        \caption{A raster \texttt{.png} plot.}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{figure}
+        \includegraphics[width=\linewidth]{figures/example-diagram.pdf}
+        \caption{A vector \texttt{.pdf} diagram.}
+      \end{figure}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \section{Summary}

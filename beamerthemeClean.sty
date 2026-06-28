@@ -54,6 +54,13 @@
 \setbeamerfont{bibliography entry location}{size=\footnotesize}
 \setbeamerfont{bibliography entry note}{size=\footnotesize}
 
+% Figure captions: small, with a primary-coloured "Figure:" label — matches
+% the minimalist Typst look rather than Beamer's default boxed caption.
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=cleanPrimary}
+\setbeamerfont{caption}{size=\footnotesize}
+\setbeamerfont{caption name}{size=\footnotesize, series=\mdseries}
+
 % ----------------------------------------------------------------------
 % Fonts  (weights/sizes; actual typefaces are chosen in the .tex preamble)
 %   Target: Roboto Light for text/headings, Fira Mono for code.
