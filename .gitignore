@@ -329,3 +329,15 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code local files (not shared) 
+.claude/settings.local.json
+.claude/state
+CLAUDE.local.md
+.claude/memory/
+CLAUDE.md

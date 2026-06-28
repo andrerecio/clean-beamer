@@ -1,0 +1,72 @@
+% demo.tex — test harness for the Clean theme.
+% Compiles with pdflatex (default in CI). See CLAUDE.md for the lualatex route.
+\documentclass[aspectratio=169, 11pt]{beamer}
+
+% --- Fonts: Roboto Light (text) + Fira Mono (code) -------------------
+% These packages ship the fonts inside TeX Live, so no system-font install
+% is needed and they work under pdflatex.
+\usepackage[sfdefault, light]{roboto}
+\usepackage[scaled]{FiraMono}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+\usetheme{Clean}
+
+\title{A title}
+\subtitle{A subtitle}
+\author{Your Name \and Coauthor Name}
+\institute{Your Institution \and Coauthor Institution}
+\date{March 16, 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Section Slide as Header Level 1}
+
+\begin{frame}{Slide Title as Header Level 2}{Subtitle as Header Level 3}
+  You can put any content here, including text, images, tables, code blocks, etc.
+
+  \begin{itemize}
+    \item first unordered list item
+    \begin{itemize}
+      \item A sub item
+    \end{itemize}
+  \end{itemize}
+
+  \begin{enumerate}
+    \item first ordered list item
+    \begin{enumerate}
+      \item A sub item
+    \end{enumerate}
+  \end{enumerate}
+
+  Next, we'll briefly review some theme-specific components.
+\end{frame}
+
+\begin{frame}{Additional Theme Features}{Some extra things you can do with the clean theme}
+  Special classes for emphasis
+  \begin{itemize}
+    \item \alert{alerted text} uses the secondary accent colour.
+    \item \textcolor{cleanPrimary}{custom-coloured text} via \texttt{\textbackslash textcolor}.
+  \end{itemize}
+
+  A short code sample to check the monospace font:
+  \begin{semiverbatim}
+  \texttt{def hello(name):}
+  \texttt{    print(f"hi \{name\}")}
+  \end{semiverbatim}
+\end{frame}
+
+\section{Summary}
+
+\begin{frame}{Quarto Clean Typst Theme}{LaTeX / Beamer port}
+  This deck is a Beamer re-implementation of the Touying clean theme.
+  \begin{itemize}
+    \item Left-aligned titles, primary accent, triangle list markers.
+    \item Slide counter \(x / y\) in the footer.
+    \item Auto section slides via \texttt{\textbackslash AtBeginSection}.
+  \end{itemize}
+\end{frame}
+
+\end{document}

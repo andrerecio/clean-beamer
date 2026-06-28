@@ -1,0 +1,142 @@
+% beamerthemeClean.sty
+% A minimalist Beamer theme, port of the Touying "quarto-clean" theme.
+% Load with \usetheme{Clean} (file must sit next to your .tex, or on TEXMF path).
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeClean}[2025/06/28 v0.1 Clean Beamer theme]
+
+\mode<presentation>
+
+\RequirePackage{amssymb}   % \blacktriangleright for list markers
+\RequirePackage{etoolbox}
+
+% ----------------------------------------------------------------------
+% Colours  (mirrored from the Typst clean theme)
+%   jet/foreground #131516 · primary #107895 · secondary #9A2515
+% ----------------------------------------------------------------------
+\definecolor{cleanJet}{HTML}{131516}
+\definecolor{cleanPrimary}{HTML}{107895}
+\definecolor{cleanSecondary}{HTML}{9A2515}
+\definecolor{cleanBg}{HTML}{FFFFFF}
+
+\setbeamercolor{normal text}{fg=cleanJet, bg=cleanBg}
+\setbeamercolor{alerted text}{fg=cleanSecondary}
+\setbeamercolor{structure}{fg=cleanPrimary}
+
+\setbeamercolor{title}{fg=cleanJet}
+\setbeamercolor{subtitle}{fg=cleanPrimary}
+\setbeamercolor{author}{fg=cleanJet}
+\setbeamercolor{institute}{fg=cleanJet}
+\setbeamercolor{date}{fg=cleanJet}
+
+\setbeamercolor{frametitle}{fg=cleanJet, bg=}
+\setbeamercolor{framesubtitle}{fg=cleanPrimary}
+
+\setbeamercolor{itemize item}{fg=cleanPrimary}
+\setbeamercolor{itemize subitem}{fg=cleanPrimary}
+\setbeamercolor{itemize subsubitem}{fg=cleanPrimary}
+\setbeamercolor{enumerate item}{fg=cleanPrimary}
+\setbeamercolor{enumerate subitem}{fg=cleanPrimary}
+
+\setbeamercolor{section title}{fg=cleanPrimary}
+\setbeamercolor{footline}{fg=cleanJet}
+
+% ----------------------------------------------------------------------
+% Fonts  (weights/sizes; actual typefaces are chosen in the .tex preamble)
+%   Target: Roboto Light for text/headings, Fira Mono for code.
+% ----------------------------------------------------------------------
+\setbeamerfont{title}{size=\LARGE, series=\mdseries}
+\setbeamerfont{subtitle}{size=\large, shape=\itshape, series=\mdseries}
+\setbeamerfont{author}{size=\normalsize, series=\mdseries}
+\setbeamerfont{institute}{size=\small, shape=\itshape}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{frametitle}{size=\Large, series=\mdseries}
+\setbeamerfont{framesubtitle}{size=\large, shape=\itshape, series=\mdseries}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{section title}{size=\Huge, series=\bfseries}
+
+% ----------------------------------------------------------------------
+% Chrome: no navigation symbols, left-aligned, generous margins
+% ----------------------------------------------------------------------
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=2em, text margin right=2em}
+\raggedright
+
+% ----------------------------------------------------------------------
+% List markers
+%   level 1: filled right triangle (primary) · level 2: arrow · level 3: dot
+% ----------------------------------------------------------------------
+\setbeamertemplate{itemize item}%
+  {\small\textcolor{cleanPrimary}{$\blacktriangleright$}}
+\setbeamertemplate{itemize subitem}%
+  {\textcolor{cleanPrimary}{$\rightarrow$}}
+\setbeamertemplate{itemize subsubitem}%
+  {\textcolor{cleanPrimary}{$\cdot$}}
+
+\setbeamertemplate{enumerate item}%
+  {\textcolor{cleanPrimary}{\insertenumlabel.}}
+\setbeamertemplate{enumerate subitem}%
+  {\textcolor{cleanPrimary}{\insertsubenumlabel.}}
+
+% ----------------------------------------------------------------------
+% Frame title (left aligned) with optional italic primary subtitle
+% ----------------------------------------------------------------------
+\setbeamertemplate{frametitle}{%
+  \vspace*{1em}%
+  {\usebeamerfont{frametitle}\usebeamercolor[fg]{frametitle}\insertframetitle\par}%
+  \ifx\insertframesubtitle\@empty\else
+    \vspace*{0.15em}%
+    {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\par}%
+  \fi
+  \vspace*{0.5em}%
+}
+
+% ----------------------------------------------------------------------
+% Footline:  slide x / y  (bottom right)
+% ----------------------------------------------------------------------
+\setbeamertemplate{footline}{%
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1.5ex,
+                           leftskip=2em, rightskip=2em]{footline}%
+      \usebeamerfont{footline}%
+      \hfill\insertframenumber\,/\,\inserttotalframenumber%
+    \end{beamercolorbox}%
+  }%
+}
+
+% ----------------------------------------------------------------------
+% Title page
+% ----------------------------------------------------------------------
+\setbeamertemplate{title page}{%
+  \vfill
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+  \ifx\insertsubtitle\@empty\else
+    \vspace*{0.3em}%
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+  \fi
+  \vspace*{1.5em}%
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
+  \ifx\insertinstitute\@empty\else
+    \vspace*{0.2em}%
+    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+  \fi
+  \vspace*{0.6em}%
+  {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}%
+  \vfill
+}
+
+% ----------------------------------------------------------------------
+% Section slide (mirrors Touying's "= Section" auto slide)
+% ----------------------------------------------------------------------
+\setbeamertemplate{section page}{%
+  \vfill
+  {\usebeamerfont{section title}\usebeamercolor[fg]{section title}%
+   \insertsectionhead\par}%
+  \vfill
+}
+\AtBeginSection[]{%
+  \begin{frame}[plain, noframenumbering]
+    \sectionpage
+  \end{frame}%
+}
+
+\mode<all>

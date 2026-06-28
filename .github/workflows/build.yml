@@ -1,0 +1,29 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile demo.tex (pdflatex via latexmk)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: demo.tex
+          # Engine: pdflatex is the default. To switch to LuaLaTeX (needed for
+          # fontspec + true Fira Code), set the next line to true instead.
+          latexmk_use_lualatex: false
+
+      - name: Upload PDF artifact
+        if: always()              # keep the log/PDF even when the build is red
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-pdf
+          path: demo.pdf
+          if-no-files-found: ignore
