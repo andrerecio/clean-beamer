@@ -1,5 +1,9 @@
 # clean-beamer
 
+[![build](https://github.com/andrerecio/clean-beamer/actions/workflows/build.yml/badge.svg)](https://github.com/andrerecio/clean-beamer/actions/workflows/build.yml)
+[![license](https://img.shields.io/github/license/andrerecio/clean-beamer)](LICENSE)
+[![demo](https://img.shields.io/badge/demo-PDF-EC1C24?logo=adobeacrobatreader&logoColor=white)](demo.pdf)
+
 A minimalist Beamer theme — a LaTeX port of the Typst
 [`touying-quarto-clean`](https://typst.app/universe/package/touying-quarto-clean/)
 slide theme (itself based on Grant McDermott's *Clean* theme for Quarto +
