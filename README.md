@@ -11,7 +11,12 @@ slide theme (itself based on Grant McDermott's *Clean* theme for Quarto +
 Reveal.js).
 
 
-See the rendered result in **[`demo.pdf`](demo.pdf)** 
+See the rendered result in **[`demo.pdf`](demo.pdf)**
+
+<p align="center">
+  <a href="demo.pdf"><img src="assets/demo-thumb.png" width="480"
+     alt="Preview of the first slide — click for the full demo.pdf"></a>
+</p>
 
 ## Use
 

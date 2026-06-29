@@ -20,10 +20,19 @@ jobs:
           # fontspec + true Fira Code), set the next line to true instead.
           latexmk_use_lualatex: false
 
+      - name: Render first-slide thumbnail (PNG)
+        if: success()
+        run: |
+          sudo apt-get update && sudo apt-get install -y poppler-utils
+          mkdir -p assets
+          pdftoppm -png -singlefile -r 150 demo.pdf assets/demo-thumb
+
       - name: Upload PDF artifact
         if: always()              # keep the log/PDF even when the build is red
         uses: actions/upload-artifact@v4
         with:
           name: demo-pdf
-          path: demo.pdf
+          path: |
+            demo.pdf
+            assets/demo-thumb.png
           if-no-files-found: ignore
