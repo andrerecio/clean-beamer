@@ -2,13 +2,22 @@
 % A minimalist Beamer theme, port of the Touying "quarto-clean" theme.
 % Load with \usetheme{Clean} (file must sit next to your .tex, or on TEXMF path).
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerthemeClean}[2025/06/28 v0.1 Clean Beamer theme]
+\ProvidesPackage{beamerthemeClean}[2026/06/30 v0.2 Clean Beamer theme]
 
 \mode<presentation>
 
 \RequirePackage{amssymb}   % \blacktriangleright for list markers
 \RequirePackage{etoolbox}
-\RequirePackage{orcidlink} % ORCID badge (tikz-drawn, pdflatex-safe) on title page
+% ORCID badge (tikz-drawn, pdflatex-safe) on the title page. Loaded defensively
+% so \usetheme{Clean} still works on TeX installs without orcidlink — decks that
+% never render an ORCID id simply get a no-op \orcidlink and compile fine.
+\IfFileExists{orcidlink.sty}{\RequirePackage{orcidlink}}{%
+  \providecommand{\orcidlink}[1]{}}
+% Author names on the title page use Roboto Regular (400) so they sit heavier
+% than the light body, matching the Typst theme. A no-op fallback keeps the
+% theme loadable without the roboto package (the real \robotoregular, defined
+% by roboto via \def, overrides this when that package is present).
+\providecommand{\robotoregular}{}
 
 % ----------------------------------------------------------------------
 % Colours  (mirrored from the Typst clean theme)
@@ -41,6 +50,15 @@
 
 \setbeamercolor{section title}{fg=cleanPrimary}
 \setbeamercolor{footline}{fg=cleanJet}
+
+% Blocks: keep all three variants inside the four-token palette. Beamer's
+% default "example" colour is green!50!black, which is off-palette; standard and
+% alert blocks already inherit structure (primary) and alerted text (secondary).
+% Bodies stay jet-on-white.
+\setbeamercolor{block title}{fg=cleanPrimary}
+\setbeamercolor{block title alerted}{fg=cleanSecondary}
+\setbeamercolor{block title example}{fg=cleanPrimary}
+\setbeamercolor{example text}{fg=cleanPrimary}
 
 % Bibliography (works with biblatex or classic bibtex output): drop the
 % default reference icon and render entries small, in the foreground colour.
@@ -84,7 +102,7 @@
 
 % ----------------------------------------------------------------------
 % List markers
-%   itemize  level 1: filled right triangle · level 2: arrow · level 3: dot
+%   itemize  level 1: filled right triangle · level 2+: arrow (as in Typst)
 %   enumerate level 1: 1. · level 2: i. · level 3: a.  (all primary)
 % ----------------------------------------------------------------------
 \setbeamertemplate{itemize item}%
@@ -92,7 +110,7 @@
 \setbeamertemplate{itemize subitem}%
   {\textcolor{cleanPrimary}{$\rightarrow$}}
 \setbeamertemplate{itemize subsubitem}%
-  {\textcolor{cleanPrimary}{$\cdot$}}
+  {\textcolor{cleanPrimary}{$\rightarrow$}}
 
 % Format each level's own counter so nesting reads 1. / i. / a.
 % (\insertenumlabel is always arabic, so it can't give roman/alpha sublevels.)
@@ -153,7 +171,7 @@
   \stepcounter{cleancol}%
   \begin{minipage}[t]{\cleancolwd}%
     \raggedright
-    {\usebeamerfont{author}\usebeamercolor[fg]{author}%
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\robotoregular
      #1\ifblank{#2}{}{~\orcidlink{#2}}\par}%
     \ifblank{#3}{}{{\footnotesize\itshape
       \href{mailto:#3}{\textcolor{cleanJet}{#3}}\par}}%
@@ -166,11 +184,28 @@
   \fi
 }
 
+% Pad the final (partial) row with empty cells so every row has exactly
+% \cleanNcols column slots. Without this, a last row of two cells in a 3-column
+% grid (5, 8, 11... authors) is "[A]\hfill[B]\hfill", and the equal \hfill glue
+% drifts B toward the slide centre instead of seating it under column 2.
+\newcommand{\clean@padgrid}{%
+  \@tempcnta=\value{cleanauthors}\relax
+  \loop\ifnum\@tempcnta>\cleanNcols\relax \advance\@tempcnta-\cleanNcols\relax\repeat
+  \ifnum\@tempcnta<\cleanNcols\relax
+    \@tempcntb=\cleanNcols\relax \advance\@tempcntb-\@tempcnta\relax
+    \loop\ifnum\@tempcntb>0\relax
+      \appto\clean@authorcells{\clean@authorcell{}{}{}{}}%
+      \advance\@tempcntb-1\relax
+    \repeat
+  \fi
+}
+
 % Lay the accumulated cells out in min(n,3) equal-width columns.
 \newcommand{\clean@rendergrid}{%
   \edef\cleanNcols{\ifnum\value{cleanauthors}<3 \number\value{cleanauthors}\else3\fi}%
   \setlength{\cleancolwd}{\dimexpr\textwidth/\cleanNcols-1.5em\relax}%
   \setcounter{cleancol}{0}%
+  \clean@padgrid
   \clean@authorcells\par
 }
 
@@ -187,6 +222,12 @@
   \vspace*{1.5em}%
   \ifnum\value{cleanauthors}>0
     \clean@rendergrid
+    % A document-level \institute{...} still shows beneath the grid (per-author
+    % affiliation goes in \cleanauthor's 4th argument).
+    \ifx\insertinstitute\@empty\else
+      \vspace*{0.2em}%
+      {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}%
+    \fi
   \else
     {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}%
     \ifx\insertinstitute\@empty\else
@@ -212,6 +253,20 @@
   \begin{frame}[plain, noframenumbering]
     \sectionpage
   \end{frame}%
+}
+
+% ----------------------------------------------------------------------
+% Title slide: chrome-free, matching the Typst reference. \maketitle wraps
+% \titlepage in a [plain, noframenumbering] frame, so the title page shows no
+% footer/slide number and the first *content* slide is numbered "1 / N" (not
+% "2 / N"). Consistent with the [plain] section slides above.
+% ----------------------------------------------------------------------
+\renewcommand{\maketitle}{%
+  \ifbeamer@inframe
+    \titlepage
+  \else
+    \begin{frame}[plain, noframenumbering]\titlepage\end{frame}%
+  \fi
 }
 
 \mode<all>

@@ -57,9 +57,10 @@ columns:
 \cleanauthor{Coauthor}{}{coauthor@other.edu}{Other Institution}
 ```
 
-Any of the ORCID / email / affiliation arguments may be left empty (`{}`). If no
-`\cleanauthor` is given, the title page falls back to plain `\author` /
-`\institute`.
+Any of the ORCID / email / affiliation arguments may be left empty (`{}`). Put
+each author's affiliation in the 4th argument; a document-level `\institute{...}`
+is still shown beneath the grid if you set one. If no `\cleanauthor` is given, the
+title page falls back to plain `\author` / `\institute`.
 
 ## Citations
 
@@ -127,3 +128,20 @@ GitHub Actions, which uploads the resulting `demo.pdf` as a build artifact
 (Actions → latest run → Artifacts → `demo-pdf`).
 
 To build locally: `latexmk -pdf demo.tex`.
+
+## License & attribution
+
+This Beamer theme is released under the [MIT License](LICENSE),
+© 2026 Andrea Recine.
+
+It is a derivative **port** of two MIT-licensed upstream projects, whose
+copyright and permission notices are preserved in
+[`reference/LICENSE-upstream`](reference/LICENSE-upstream):
+
+- [`quarto-clean-typst`](https://github.com/kazuyanagimoto/quarto-clean-typst)
+  (the Typst / Touying theme this port follows) — © 2024 Kazuharu Yanagimoto.
+  Its source is vendored read-only under [`reference/`](reference/).
+- [Grant McDermott's *Clean* theme](https://github.com/grantmcdermott/quarto-revealjs-clean)
+  for Quarto + Reveal.js (the original design) — © 2023 Grant McDermott.
+
+With thanks to both authors for the original work.
