@@ -11,6 +11,13 @@
 % while still in OT1/cmss, which has no light series — yielding a
 % "Font shape `OT1/cmss/l/n' undefined" substitution warning.
 \usepackage[T1]{fontenc}
+% roboto's [light] option makes `l' the default series before the package
+% internally re-loads fontenc, which then reselects the still-current cmss
+% family — and cmss ships no light series, so every compile logs a harmless
+% "Font shape `T1/cmss/l/n' undefined" substitution warning. Pre-declare that
+% shape as a silent (ssub) alias of the medium series to keep the log clean.
+\makeatletter\input{t1cmss.fd}\makeatother
+\DeclareFontShape{T1}{cmss}{l}{n}{<->ssub * cmss/m/n}{}
 \usepackage[sfdefault, light]{roboto}
 \usepackage[scaled]{FiraMono}
 \usepackage{microtype}
