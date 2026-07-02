@@ -6,9 +6,13 @@
 % --- Fonts: Roboto Light (text) + Fira Mono (code) -------------------
 % These packages ship the fonts inside TeX Live, so no system-font install
 % is needed and they work under pdflatex.
+% fontenc must come first: roboto's [light] option switches the default series
+% to l (light), and if fontenc loads afterwards it re-selects the current font
+% while still in OT1/cmss, which has no light series — yielding a
+% "Font shape `OT1/cmss/l/n' undefined" substitution warning.
+\usepackage[T1]{fontenc}
 \usepackage[sfdefault, light]{roboto}
 \usepackage[scaled]{FiraMono}
-\usepackage[T1]{fontenc}
 \usepackage{microtype}
 
 % --- Bibliography: true Chicago author–date via biblatex-chicago -----
@@ -108,14 +112,14 @@
     \begin{column}{0.5\textwidth}
       \begin{figure}
         \centering
-        \includegraphics[width=\linewidth, height=4cm, keepaspectratio]{figures/example-plot.png}
+        \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio]{figures/example-plot.png}
         \caption{A raster \texttt{.png} plot.}
       \end{figure}
     \end{column}
     \begin{column}{0.5\textwidth}
       \begin{figure}
         \centering
-        \includegraphics[width=\linewidth, height=4cm, keepaspectratio]{figures/example-diagram.pdf}
+        \includegraphics[width=\linewidth, height=3.2cm, keepaspectratio]{figures/example-diagram.pdf}
         \caption{A vector \texttt{.pdf} diagram.}
       \end{figure}
     \end{column}

@@ -188,13 +188,16 @@
 % \cleanNcols column slots. Without this, a last row of two cells in a 3-column
 % grid (5, 8, 11... authors) is "[A]\hfill[B]\hfill", and the equal \hfill glue
 % drifts B toward the slide centre instead of seating it under column 2.
+% Pads go into \clean@gridcells (a per-render copy), never into
+% \clean@authorcells itself, so rendering the title page more than once
+% doesn't accumulate phantom cells.
 \newcommand{\clean@padgrid}{%
   \@tempcnta=\value{cleanauthors}\relax
   \loop\ifnum\@tempcnta>\cleanNcols\relax \advance\@tempcnta-\cleanNcols\relax\repeat
   \ifnum\@tempcnta<\cleanNcols\relax
     \@tempcntb=\cleanNcols\relax \advance\@tempcntb-\@tempcnta\relax
     \loop\ifnum\@tempcntb>0\relax
-      \appto\clean@authorcells{\clean@authorcell{}{}{}{}}%
+      \appto\clean@gridcells{\clean@authorcell{}{}{}{}}%
       \advance\@tempcntb-1\relax
     \repeat
   \fi
@@ -205,8 +208,9 @@
   \edef\cleanNcols{\ifnum\value{cleanauthors}<3 \number\value{cleanauthors}\else3\fi}%
   \setlength{\cleancolwd}{\dimexpr\textwidth/\cleanNcols-1.5em\relax}%
   \setcounter{cleancol}{0}%
+  \let\clean@gridcells\clean@authorcells
   \clean@padgrid
-  \clean@authorcells\par
+  \clean@gridcells\par
 }
 
 % ----------------------------------------------------------------------
